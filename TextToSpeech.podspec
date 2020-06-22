@@ -1,6 +1,6 @@
 
   Pod::Spec.new do |s|
-    s.name = 'TextToSpeech'
+    s.name = 'CapacitorCommunityTextToSpeech'
     s.version = '0.0.1'
     s.summary = 'A native plugin for text to speech engine'
     s.license = 'MIT'
