@@ -28,10 +28,10 @@ public class TextToSpeech: CAPPlugin, AVSpeechSynthesizerDelegate {
     }
     
     @objc func speak(_ call: CAPPluginCall) {
-      
+        let text = call.getString("text") ?? ""
         self.ttsSynthesizer?.stopSpeaking(at: .immediate)
         
-        self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: "你好，世界")
+        self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: text)
         //self.ttsUtterance?.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
         self.ttsUtterance?.voice = AVSpeechSynthesisVoice(language: "zh-CN")
         self.ttsSynthesizer?.speak(self.ttsUtterance!)
