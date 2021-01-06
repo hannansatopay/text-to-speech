@@ -28,35 +28,12 @@ public class TextToSpeech: CAPPlugin, AVSpeechSynthesizerDelegate {
     }
     
     @objc func speak(_ call: CAPPluginCall) {
-        let text = call.getString("text") ?? ""
-        let locale = call.getString("locale") ?? "en-US"
-        let speechRate = call.getDouble("speechRate") ?? 1.0
-        let pitchRate = call.getDouble("pitchRate") ?? 1.0
-        let category = call.getString("category") ?? "ambient"
-        let volume = call.getDouble("volume") ?? 1.0
+        let utterance = AVSpeechUtterance(string: "Hello world")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        utterance.rate = 0.1 
         
-        do {
-            try AVAudioSession.sharedInstance().setActive(false, options: [])
-        } catch {}
-        
-        if (category == "ambient") {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
-            }  catch {}
-        } else {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            } catch {}
-        }
-        
-        self.ttsSynthesizer?.stopSpeaking(at: .immediate)
-        
-        self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: text)
-        self.ttsUtterance?.voice = AVSpeechSynthesisVoice(language: locale)
-        self.ttsUtterance?.rate = Float(speechRate)
-        self.ttsUtterance?.pitchMultiplier = Float(pitchRate)
-        self.ttsUtterance?.volume = Float(volume)
-        self.ttsSynthesizer?.speak(self.ttsUtterance!)
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
         
         call.success()
     }
