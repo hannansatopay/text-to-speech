@@ -27,14 +27,12 @@ public class TextToSpeech: CAPPlugin, AVSpeechSynthesizerDelegate {
         }
     }
     
-    @objc func speak(_ call: CAPPluginCall) {      
+    @objc func speak(_ call: CAPPluginCall) {
+      
         self.ttsSynthesizer?.stopSpeaking(at: .immediate)
         
         self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: "Hello world this is a fun day, I really hope this works")
         self.ttsUtterance?.voice = AVSpeechSynthesisVoice(language: "en-US")
-        self.ttsUtterance?.rate = Float(speechRate)
-        self.ttsUtterance?.pitchMultiplier = Float(pitchRate)
-        self.ttsUtterance?.volume = Float(volume)
         self.ttsSynthesizer?.speak(self.ttsUtterance!)
         
         call.success()
