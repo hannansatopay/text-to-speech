@@ -32,7 +32,7 @@ public class TextToSpeech: CAPPlugin, AVSpeechSynthesizerDelegate {
         self.ttsSynthesizer?.stopSpeaking(at: .immediate)
         
         self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: "Hello world this is a fun day, I really hope this works")
-        self.ttsUtterance?.voice = AVSpeechSynthesisVoice(language: "en-US")
+        self.ttsUtterance?.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex) else { return }
         self.ttsSynthesizer?.speak(self.ttsUtterance!)
         
         call.success()
