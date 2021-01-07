@@ -34,6 +34,7 @@ public class TextToSpeech: CAPPlugin, AVSpeechSynthesizerDelegate {
         self.ttsUtterance = type(of: AVSpeechUtterance()).init(string: text)
         //self.ttsUtterance?.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
         self.ttsUtterance?.voice = AVSpeechSynthesisVoice(language: "zh-CN")
+        self.ttsUtterance?.rate = 0.4
         self.ttsSynthesizer?.speak(self.ttsUtterance!)
         
         call.success()
